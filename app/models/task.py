@@ -6,8 +6,12 @@ from app.models.user import User
 
 
 class Task(DateModel):
-    create_user = models.ForeignKey(verbose_name="업무-유저", to=User, on_delete=models.SET_NULL, null=True, blank=True)
-    team = models.ForeignKey(verbose_name="업무-팀", to=Team, on_delete=models.SET_NULL, null=True, blank=True)
+    create_user = models.ForeignKey(
+        verbose_name="업무-유저", to=User, on_delete=models.SET_NULL, null=True, blank=True
+    )
+    team = models.ForeignKey(
+        verbose_name="업무-팀", to=Team, on_delete=models.SET_NULL, null=True, blank=True
+    )
 
     title = models.CharField("제목", max_length=100)
     content = models.TextField("내용")
@@ -28,15 +32,9 @@ class SubTask(DateModel):
 
 class SubTaskTeamAssociation(DateModel):
     subtask = models.ForeignKey(
-        verbose_name="하위업무",
-        to=SubTask,
-        on_delete=models.CASCADE
+        verbose_name="하위업무", to=SubTask, on_delete=models.CASCADE
     )
-    team = models.ForeignKey(
-        verbose_name="팀",
-        to=Team,
-        on_delete=models.CASCADE
-    )
+    team = models.ForeignKey(verbose_name="팀", to=Team, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = verbose_name_plural = "하위업무-팀-연관정보"
