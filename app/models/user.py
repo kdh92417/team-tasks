@@ -18,7 +18,7 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser):
-    user_name = models.CharField("이름", max_length=255)
+    user_name = models.CharField("이름", max_length=255, unique=True)
     team = models.ForeignKey(
         verbose_name="유저-팀", to=Team, on_delete=models.SET_NULL, null=True, blank=True
     )
