@@ -179,8 +179,8 @@ AUTH_USER_MODEL = "app.User"
 SPECTACULAR_SETTINGS = {
     # General schema metadata. Refer to spec for valid inputs
     # https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.3.md#openapi-object
-    "TITLE": "drf-spectacular API Document",
-    "DESCRIPTION": "Team API DOcs",
+    "TITLE": "Task Management API Document",
+    "DESCRIPTION": "Team API Docs",
     # Optional: MAY contain "name", "url", "email"
     "SERVE_PERMISSIONS": ["rest_framework.permissions.AllowAny"],
     "SWAGGER_UI_SETTINGS": {
