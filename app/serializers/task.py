@@ -12,6 +12,12 @@ class SubTaskSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class CreateSubTaskSerializer(SubTaskSerializer):
+    class Meta:
+        model = SubTask
+        fields = ["task", "team"]
+
+
 class TaskSerializer(serializers.ModelSerializer):
     sub_tasks = SubTaskSerializer(label="하위 업무", many=True, read_only=True)
 
@@ -88,18 +94,18 @@ class CreateTaskSerializer(TaskSerializer):
 
         return task
 
+
+class UpdateTaskSerializer(TaskSerializer):
+    class Meta:
+        model = Task
+        fields = ["title", "content"]
+
     def update(self, instance, validated_data):
         updater = self.context.get("request").user
         if instance.create_user != updater:
             raise ValidationError("작성자 본인만 업무내용 수정이 가능합니다.")
 
-        if validated_data["title"]:
-            instance.title = validated_data["title"]
-        if validated_data["content"]:
-            instance.content = validated_data["content"]
-        instance.save()
-
-        return instance
+        return super().update(instance, validated_data)
 
 
 class CompleteSubTaskSerializer(serializers.ModelSerializer):
