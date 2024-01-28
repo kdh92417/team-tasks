@@ -51,7 +51,10 @@ class TaskTests(APITestCase):
             self.client.force_authenticate(user=sub_task_user)
 
         resp = self.client.post(
-            reverse("task-completion", kwargs={"pk": sub_task.id}),
+            reverse(
+                "sub-task-completion",
+                kwargs={"task_id": sub_task.task.id, "pk": sub_task.id},
+            ),
             HTTP_ACCEPT="application/json",
         )
 
